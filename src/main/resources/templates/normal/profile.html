@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Profile</title>
+</head>
+
+<body>
+    <section>
+        <img style="height: 200px; width: 200px;" src="" th:src="@{'/images/' +${user.imageName} }" alt="profilePhoto">
+        <h1>
+            User Profile
+        </h1>
+        <h3>UserName: <span th:text="${user.name}"></span></h3>
+        <h3>UserName: <span th:text="${user.email}"></span></h3>
+        <h3>UserName: <span th:text="${user.role}"></span></h3>
+        <h3>UserName: <span th:text="${user.about}"></span></h3>
+
+    </section>
+
+</body>
+
+</html>

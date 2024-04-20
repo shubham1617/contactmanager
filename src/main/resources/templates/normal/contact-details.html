@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Contact Details</title>
+</head>
+
+<body>
+    <section>
+
+        <div class="main" th:if="${details}">
+            <h1 class="text-center py-1">Welcome to Contact Details</h1>
+            <div class="card col-md-10 offset-md-1">
+
+                <div class="card-body">
+                    <div class="container text-center">
+                        <img src="" style="height: 200px; width:200px ; border-radius: 100%;" alt="contact photo"
+                            th:src="@{'/images/'+${details.imageName}}">
+
+                        <h3><span th:text="${details.name}"></span> (<span th:text="${details.nickName}"></span>)</h3>
+
+                        <table class="table table-borderless mt-5">
+                            <thead class="">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col" th:text="@{${'C'+details.cid}}">#</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Email</th>
+                                    <td scope="row" th:text="${details.email}">#</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Phone No.</th>
+                                    <td scope="row" th:text="${details.phoneNumber}">#</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Job</th>
+                                    <td scope="row" th:text="${details.work}">#</th>
+                                </tr>
+
+                                <tr>
+                                    <th scope="row">Description</th>
+                                    <td scope="row" th:utext="${details.description}">#</th>
+                                </tr>
+
+
+                            </tbody>
+
+
+                        </table>
+                        <div class="container ">
+                            <form method="post" th:action="@{'/user/update-contact/' + ${details.cid}}">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
+                            <button th:onclick="|deleteImage(${details.cid})|" class="btn btn-danger"><a href=""></a>
+                                Delete</button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5 col-md-10 offset-md-1" style="background-color: red; width: 80%; color: white; "
+            th:unless="${details}">
+            <H1>You dont have access to this page</H1>
+        </div>
+
+
+
+    </section>
+
+</body>
+
+</html>

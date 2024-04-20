@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/normal/base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Show Contacts</title>
+</head>
+
+<body>
+    <section>
+        <h1 class="text-center">Show Contacts</h1>
+        <div class="card col-md-10 offset-md-1">
+
+            <div class="card-body">
+
+
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Mobile</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="c: ${contacts}">
+                            <th scope="row">
+                                <a th:href="@{'/user/'+${c.cid}+'/contact'}">
+                                    <span th:text=" ${'C'+c.cid}"></span>
+                                </a>
+
+                                </span>
+                            </th>
+                            <td>
+                                <img class="image" th:src="@{'/images/'+${c.imageName}}" alt="profile photo">
+                                <span th:text="${c.name}"></span>
+                            </td>
+                            <td th:text="${c.email}">@mdo</td>
+                            <td th:text="${c.phoneNumber}">@mdo</td>
+                            <td>
+                                <a th:onclick="|deleteImage(${c.cid})|" class="btn btn-danger">Delete</a>
+                                <form method="post" th:action="@{'/user/update-contact/' + ${c.cid}}">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                </form>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <!--Pagination Part-->
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li th:if="${currectPage!= 0}" class="page-item"><a class="page-link"
+                                th:href="${currectPage-1}">Previous</a>
+                        </li>
+                        <li th:classappend="${currectPage==i-1?'active':''}"
+                            th:each="i:${#numbers.sequence(1,totalPages)}" class="page-item">
+                            <a class="page-link" th:href="${i-1}"> <span th:text="${i}"></span></a>
+                        </li>
+
+                        <li th:if="${currectPage+1 != totalPages}" class="page-item"><a class="page-link"
+                                th:href="${currectPage+1}">Next</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>
